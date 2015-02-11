@@ -26,7 +26,16 @@ public class Blosc {
   }
   public int blosc_compress(int clevel, int doshuffle, int typesize, int nbytes, byte[] src, byte[] dest, int destsize)
   {
+    System.out.print("Compressing\nLevel: ");
     System.out.println(clevel);
+    System.out.print("Shuffle: ");
+    if (1 == doshuffle) 
+      System.out.println("Yes");
+    else
+      System.out.println("No");
+    System.out.print("Type Size: ");
+    System.out.println(typesize);
+    System.out.println("Starting");
     return 10;
   }
 }
