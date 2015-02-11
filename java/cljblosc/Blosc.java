@@ -15,6 +15,7 @@ public class Blosc {
                       int nbytes, byte[] src, byte[] dest,
                       int destsize, String comp, 
                       int blocksize, int numthreads);
+    int blosc_decompress_ctx(byte[] src, byte[] dest, int destsize, int numthreads);
   }
 
   public void blosc_init()
@@ -38,5 +39,13 @@ public class Blosc {
     System.out.println(typesize);
     System.out.println("Starting");
     return BloscLib.INSTANCE.blosc_compress_ctx(clevel, doshuffle, typesize, nbytes, src, dest, destsize, "blosclz", 0, 4);
+  }
+  public int blosc_decompress(byte[] src, byte[] dest, int destsz, int numthreads)
+  {
+    System.out.println("Decompressing");
+    System.out.println(src);
+    System.out.println(src[0]);
+    System.out.println(destsz);
+    return BloscLib.INSTANCE.blosc_decompress_ctx(src, dest, destsz, numthreads);
   }
 }

@@ -19,9 +19,16 @@
      (println "threads: " threads)
      (println "to-compress:" to-compress)
      (println "to-compress (type): " (type to-compress))
-     (.blosc_compress b clevel doshuffle typesize sz to-compress ob (count ob) )))
+     (let [out-sz (.blosc_compress b clevel doshuffle typesize sz to-compress ob (count ob))]
+       [ob out-sz])))
   )
 
-(defn decompress  []
+(defn decompress  [to-decompress]
   "Decompress Blosc data"
-  (println "Decompress"))
+  (println "Decompress")
+  (let [b (blosc)
+        threads 0
+        ob (byte-array 1000000)
+        out-sz (.blosc_decompress b to-decompress ob (count ob) threads)]
+    [ob out-sz])
+  )
