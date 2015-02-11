@@ -11,9 +11,10 @@ public class Blosc {
 
     void blosc_init();
     void blosc_destroy();
-    int blosc_compress(int clevel, int doshuffle, int typesize,
+    int blosc_compress_ctx(int clevel, int doshuffle, int typesize,
                       int nbytes, byte[] src, byte[] dest,
-                      int destsize);
+                      int destsize, String comp, 
+                      int blocksize, int numthreads);
   }
 
   public void blosc_init()
@@ -36,6 +37,6 @@ public class Blosc {
     System.out.print("Type Size: ");
     System.out.println(typesize);
     System.out.println("Starting");
-    return 10;
+    return BloscLib.INSTANCE.blosc_compress_ctx(clevel, doshuffle, typesize, nbytes, src, dest, destsize, "blosclz", 0, 4);
   }
 }
